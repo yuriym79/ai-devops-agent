@@ -49,6 +49,106 @@ No cloud dependencies.
 
 ---
 
+## ✅ Prerequisites
+
+Before running the AI DevOps Agent, make sure your system meets the following requirements.
+
+---
+
+### 1. Python
+
+Python **3.10 or newer** is required.
+
+Verify installation:
+
+```bash
+python --version
+```
+
+or
+
+```bash
+python3 --version
+```
+
+If Python is not installed:
+
+👉 https://www.python.org/downloads/
+
+---
+
+### 2. Ollama (Local LLM Runtime)
+
+This project runs entirely offline using Ollama.
+
+Install Ollama:
+
+👉 https://ollama.com/download
+
+After installation, pull a supported model:
+
+```bash
+ollama pull qwen2.5:7b
+```
+
+Test the model:
+
+```bash
+ollama run qwen2.5:7b
+```
+
+If the model responds, Ollama is working correctly.
+
+---
+
+### 3. Operating System
+
+Tested environments:
+
+- Windows (PowerShell / MINGW / Git Bash)
+- macOS
+- Linux
+
+Virtual environment activation:
+
+**Windows**
+
+```bash
+source venv/Scripts/activate
+```
+
+**macOS / Linux**
+
+```bash
+source venv/bin/activate
+```
+
+---
+
+### 4. Hardware Recommendation
+
+For best performance:
+
+- GPU with **8GB+ VRAM** recommended
+- **16GB system RAM** minimum
+- SSD storage
+
+The agent can run on CPU-only systems, but responses will be slower.
+
+---
+
+### 5. Internet Requirement (First Run Only)
+
+Internet access is required only once to download the model:
+
+```bash
+ollama pull qwen2.5:7b
+```
+
+After that, the agent runs fully offline.
+
+---
+
 ## 📦 Installation
 
 ### 1. Install Ollama
@@ -133,7 +233,7 @@ This allows context-aware debugging across sessions.
 
 ---
 
-## 🔒 Privacy
+## 🔒 Privacy & Security
 
 Everything runs locally:
 
@@ -142,6 +242,10 @@ Everything runs locally:
 - full offline operation
 
 Your logs and files never leave your machine.
+
+Security / Safety Note
+
+Since it executes local commands in a powerful way, a short warning about safety (e.g., “Be careful with commands like rm -rf /”) is useful.
 
 ---
 
