@@ -107,11 +107,19 @@ python main.py
 - summarize my past errors
 - review this config file
 
+```
+>> read log.txt and explain what happened
+>> run terminal ls
+>> what errors have I seen before?
+```
+
 The agent can inspect your system and reason about technical issues.
 
 ---
 
 ## 🧠 Memory System
+
+Memory lets the agent reference past sessions to provide context-aware analysis.
 
 The agent stores history in: memory/history.txt
 It remembers:
