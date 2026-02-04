@@ -69,7 +69,7 @@ ollama run qwen2.5:7b
 ### 2. Clone project
 
 ```
-git clone https://github.com/yourusername/ai-devops-agent
+git clone https://github.com/yuriym79/ai-devops-agent/tree/main
 cd ai-devops-agent
 ```
 
@@ -80,12 +80,6 @@ cd ai-devops-agent
 ```
 python -m venv venv
 source venv/bin/activate
-```
-
-Windows / MINGW:
-
-```
-source venv/Scripts/activate
 ```
 
 ---
