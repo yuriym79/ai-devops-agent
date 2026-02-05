@@ -1,293 +1,228 @@
-# AI DevOps Agent (Local LLM)
+# AI DevOps Agent
 
-A local AI-powered DevOps assistant that can read files, analyze logs, run terminal commands, and remember past interactions — all offline using a local large language model.
+A local AI-powered DevOps assistant that can read files, execute terminal commands, and maintain persistent memory — powered by Ollama and LangChain.
 
-This project explores tool-using AI agents, memory persistence, and autonomous system reasoning without relying on cloud APIs.
-
-## 🚀 Features
-
-- Local LLM (runs fully offline)
-- Tool-using agent architecture
-- File inspection
-- Terminal command execution
-- Log analysis
-- Persistent memory system
-- DevOps assistant behavior
-- Lightweight CLI interface
-
-The agent acts like a private AI sysadmin and coding copilot.
+This project runs fully offline after model download and is designed as a foundation for building autonomous AI infrastructure tools.
 
 ---
 
-## 🧠 Architecture
+## Features
 
-User CLI
-↓
-Agent Brain (Python)
-↓
-Local LLM (Ollama)
-↓
-Tools:
-• File reader
-• Terminal executor
-• Memory store
-
----
-The agent decides when to use tools, executes them, and reasons about results.
+- 📂 File reading and analysis
+- 🖥 Terminal command execution
+- 🧠 Persistent memory across sessions
+- 🤖 Local LLM via Ollama (no cloud required)
+- ⚡ Fast Python environment management with uv
+- 🔒 Safety-first design with command awareness
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
-- Python 3
-- Ollama (local LLM runtime)
-- Qwen / Llama models
-- subprocess (system execution)
-- File-based memory persistence
-
-No cloud dependencies.
-
----
-
-## ✅ Prerequisites
-
-Before running the AI DevOps Agent, make sure your system meets the following requirements.
+- Python 3.10+
+- uv (modern Python package manager)
+- LangChain
+- Ollama
+- Qwen2.5 LLM
+- Local filesystem memory store
 
 ---
+
+## Prerequisites
+
+Before running the agent, install:
 
 ### 1. Python
 
-Python **3.10 or newer** is required.
+Python 3.10 or higher
 
-Verify installation:
+Check:
 
-```bash
+```
 python --version
 ```
 
-or
-
-```bash
-python3 --version
-```
-
-If Python is not installed:
-
-👉 https://www.python.org/downloads/
-
 ---
 
-### 2. Ollama (Local LLM Runtime)
+### 2. Install uv
 
-This project runs entirely offline using Ollama.
+uv replaces pip + venv and manages dependencies automatically.
 
-Install Ollama:
+Windows:
 
-👉 https://ollama.com/download
-
-After installation, pull a supported model:
-
-```bash
-ollama pull qwen2.5:7b
+```
+powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
 
-Test the model:
+macOS/Linux:
 
-```bash
-ollama run qwen2.5:7b
+```
+curl -Ls https://astral.sh/uv/install.sh | sh
 ```
 
-If the model responds, Ollama is working correctly.
+Verify:
 
----
-
-### 3. Operating System
-
-Tested environments:
-
-- Windows (PowerShell / MINGW / Git Bash)
-- macOS
-- Linux
-
-Virtual environment activation:
-
-**Windows**
-
-```bash
-source venv/Scripts/activate
 ```
-
-**macOS / Linux**
-
-```bash
-source venv/bin/activate
+uv --version
 ```
 
 ---
 
-### 4. Hardware Recommendation
+### 3. Install Ollama
 
-For best performance:
-
-- GPU with **8GB+ VRAM** recommended
-- **16GB system RAM** minimum
-- SSD storage
-
-The agent can run on CPU-only systems, but responses will be slower.
-
----
-
-### 5. Internet Requirement (First Run Only)
-
-Internet access is required only once to download the model:
-
-```bash
-ollama pull qwen2.5:7b
-```
-
-After that, the agent runs fully offline.
-
----
-
-## 📦 Installation
-
-### 1. Install Ollama
+Download from:
 
 https://ollama.com/download
 
-Pull a model: 
+Start Ollama and pull the model:
+
 ```
 ollama pull qwen2.5:7b
 ```
+
 Test:
+
 ```
 ollama run qwen2.5:7b
 ```
 
+If it responds, you’re ready.
+
 ---
 
-### 2. Clone project
+## Setup
+
+Clone the repo:
 
 ```
-git clone https://github.com/yuriym79/ai-devops-agent/tree/main
+git clone https://github.com/yuriym79/ai-devops-agent
 cd ai-devops-agent
 ```
 
----
-
-### 3. Create virtual environment
+Install dependencies:
 
 ```
-python -m venv venv
-source venv/bin/activate
+uv sync
 ```
 
----
-
-### 4. Install dependencies
-
-```
-pip install ollama
-```
+This installs all dependencies from the lockfile.
 
 ---
 
-### 5. Run the agent
+## Run the Agent
 
 ```
-python main.py
+uv run python main.py
 ```
 
----
-
-## 🧪 Example Usage
-
-- read log.txt and explain what happened
-- run terminal docker ps
-- summarize my past errors
-- review this config file
+Example usage:
 
 ```
 >> read log.txt and explain what happened
->> run terminal ls
->> what errors have I seen before?
+>> run docker ps
+>> summarize previous errors
 ```
 
-The agent can inspect your system and reason about technical issues.
+The agent will read files, execute commands, and store memory in:
+
+```
+memory/history.txt
+```
 
 ---
 
-## 🧠 Memory System
+## Project Structure
 
-Memory lets the agent reference past sessions to provide context-aware analysis.
-
-The agent stores history in: memory/history.txt
-It remembers:
-
-- past logs
-- tool results
-- user queries
-- explanations
-
-This allows context-aware debugging across sessions.
+```
+ai-devops-agent/
+├── main.py
+├── memory/
+│   └── history.txt
+├── pyproject.toml
+├── uv.lock
+└── README.md
+```
 
 ---
 
-## 🔒 Privacy & Security
+## Safety Warning
 
-Everything runs locally:
+This agent can execute terminal commands.
 
-- no cloud APIs
-- no external data transmission
-- full offline operation
+Do NOT run destructive commands like:
 
-Your logs and files never leave your machine.
+```
+rm -rf /
+del /s /q
+```
 
-Security / Safety Note
+Always review commands before allowing execution.
 
-Since it executes local commands in a powerful way, a short warning about safety (e.g., “Be careful with commands like rm -rf /”) is useful.
+This project is for development and experimentation.
 
 ---
 
-## 🎯 Goals
+## How Memory Works
+
+The agent logs interactions to:
+
+```
+memory/history.txt
+```
+
+This allows it to:
+
+- recall past sessions
+- track recurring issues
+- provide context-aware responses
+
+Memory is simple and transparent by design.
+
+---
+
+## Why This Project Exists
 
 This project explores:
 
-- AI tool-using agents
-- local LLM orchestration
+- local AI autonomy
 - DevOps automation
-- autonomous reasoning loops
-- memory persistence in AI systems
+- safe tool-using agents
+- offline AI workflows
+- modern Python packaging
 
-It serves as a foundation for building:
-
-- AI sysadmin assistants
-- coding copilots
-- debugging agents
-- research bots
-- autonomous repair loops
+It serves as a base for future autonomous infrastructure assistants.
 
 ---
 
-## 🚧 Future Roadmap
+## Roadmap
 
-- Docker/Kubernetes inspector
-- Git intelligence agent
-- autonomous debugging loop
-- VS Code integration
-- multi-agent architecture
-- web dashboard
+Planned upgrades:
+
+- log analysis tool
+- Docker/Kubernetes integration
+- autonomous troubleshooting loop
+- command sandboxing
 - plugin system
-- voice interface
+- structured memory database
+- web dashboard
 
 ---
 
-## 📜 License
+## Contributing
+
+Pull requests welcome.
+
+Ideas for tools and automation are encouraged.
+
+---
+
+## License
 
 MIT License
 
 ---
 
-## ✨ Author
+## Author
 
-Built as an experimental AI engineering project exploring local agent systems.
+Yuriy Mikhailidi  
+Building local AI systems and DevOps tooling.
