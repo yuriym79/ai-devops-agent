@@ -9,3 +9,11 @@ dependencies = [
     "langchain-community>=0.4.1",
     "ollama>=0.6.1",
 ]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
