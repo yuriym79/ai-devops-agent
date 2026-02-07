@@ -2,6 +2,9 @@ import ollama
 import subprocess
 import os
 from datetime import datetime
+from tools.memory import ensure_memory, read_memory, append_memory
+from tools.file_tools import read_file
+from tools.terminal import run_terminal
 
 MEMORY_DIR = "memory"
 MEMORY_FILE = os.path.join(MEMORY_DIR, "history.txt")
@@ -21,35 +24,6 @@ INPUT: argument
 
 Otherwise respond normally.
 """
-
-def ensure_memory():
-    os.makedirs(MEMORY_DIR, exist_ok=True)
-    if not os.path.exists(MEMORY_FILE):
-        with open(MEMORY_FILE, "w") as f:
-            return f.write("=== AI Agent Memory ===\n")
-
-def read_memory(limit=4000):
-    try:
-        with open(MEMORY_FILE, "r") as f:
-          data = f.read()
-          return data[-limit:] # only last chunk to avoid overload      
-    except:
-        return ""
-
-def append_memory(entry):
-    timestamp = datetime.now().strftime("%d/%m/%Y, %H:%M:%S")
-    with open(MEMORY_FILE, "a") as f:
-        f.write(f"\n[{timestamp}] {entry}\n")
-
-def read_file(path):
-    try:
-        with open(path, "r") as f:
-            return f.read()
-    except Exception as e:
-        return f"Error: {e}"
-
-def run_terminal(cmd):
-    return subprocess.getoutput(cmd)[:4000]
 
 def call_model(prompt):
     response = ollama.chat(
@@ -104,7 +78,7 @@ def main():
         else:
             print(reply)
 
-            append_memory(f"USER": {user})
+            append_memory(f"USER: {user}")
             append_memory(f"AGENT: {reply}")
 
 if __name__== "__main__":
