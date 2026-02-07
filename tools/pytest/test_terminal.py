@@ -1,4 +1,4 @@
-from tools.terminal import run_terminal
+from tools.terminal_tools import run_terminal
 
 
 def test_terminal_echo():

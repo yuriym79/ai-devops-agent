@@ -2,9 +2,9 @@ import ollama
 import subprocess
 import os
 from datetime import datetime
-from tools.memory import ensure_memory, read_memory, append_memory
+from tools.memory_tools import ensure_memory, read_memory, append_memory
 from tools.file_tools import read_file
-from tools.terminal import run_terminal
+from tools.terminal_tools import run_terminal
 
 MEMORY_DIR = "memory"
 MEMORY_FILE = os.path.join(MEMORY_DIR, "history.txt")

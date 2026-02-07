@@ -1,6 +1,6 @@
 import os
 
-from tools.memory import ensure_memory, append_memory, read_memory, MEMORY_FILE
+from tools.memory_tools import ensure_memory, append_memory, read_memory, MEMORY_FILE
 
 
 def test_memory_creation():
