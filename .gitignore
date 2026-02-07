@@ -1,6 +1,7 @@
 # Gitignore
 
 # Python
+.pycache__/
 __pycache__/
 *.py[cod]
 *.pyo
