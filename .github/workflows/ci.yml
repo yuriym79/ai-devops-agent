@@ -2,17 +2,26 @@ name: AI DevOps Agent CI
 
 on:
   push:
-    branches: [ main ]
   pull_request:
-    branches: [ main ]
+    
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to run on'
+        required: true
+        default: 'main'
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.branch }}
+      - name: Echo branch
+        run: echo "Running on branch ${{ github.event.inputs.branch }}"
 
       - name: Install uv
         run: |
