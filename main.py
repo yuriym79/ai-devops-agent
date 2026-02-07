@@ -83,10 +83,6 @@ def main():
         {user}
         """
         reply = call_model(memory_promt)
-        append_memory(f"USER: {user}")
-        append_memory(f"AGENT: {reply}")
-
-        reply = call_model(user)
 
         if reply.startswith("TOOL:"):
             lines = reply.split("\n")
@@ -107,6 +103,9 @@ def main():
 
         else:
             print(reply)
+
+            append_memory(f"USER": {user})
+            append_memory(f"AGENT: {reply}")
 
 if __name__== "__main__":
     main()
