@@ -1,6 +1,18 @@
 # Git Ignore
 
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
 *.pyo
 *.pyd
+
+# Virtual env
+.venv/
+venv/
+
+# uv
+.uv/
+
+# OS junk
+.DS_Store
+Thumbs.db
